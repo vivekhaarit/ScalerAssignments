@@ -14,6 +14,7 @@ public class AllSubArray {
 
     public static int[][] solve(int[] A) {
         int n = A.length;
+        int index = 0;
         int[][] subarr = new int[(n*(n + 1))/2][];
         System.out.println(subarr.length);
         for(int i=0;i<A.length;i++){
@@ -21,9 +22,9 @@ public class AllSubArray {
                 int tmp_arr_length = j-i+1;
                 int[] tmp = new int[tmp_arr_length];
                 for(int k=i;k<=j;k++){
-                    tmp[k] = A[k];
+                    tmp[k-i] = A[k];
                 }
-                subarr[j]=tmp;
+                subarr[index++]=tmp;
             }
         }
 
