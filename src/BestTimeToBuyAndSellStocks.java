@@ -15,26 +15,15 @@ public class BestTimeToBuyAndSellStocks {
 
     public static int maxProfit(final int[] ar) {
         int profit = 0;
-        for(int i=0;i<ar.length;i++){
-            if(has_max_in_right(ar,i)) {
-                profit = Math.max(profit, max_right(ar,i)-ar[i]);
+        int max_profit = 0;
+        int max_right = ar[ar.length-1];
+        for(int i=ar.length-1;i>=0;i--){
+            if(max_right<ar[i]) {
+                max_right = ar[i];
             }
+            profit = max_right-ar[i];
+            max_profit = Math.max(max_profit,profit);
         }
-        return profit;
-    }
-
-    private static int max_right(int[] ar, int curr) {
-        int max = Integer.MIN_VALUE;
-        for(int i=curr+1;i<ar.length;i++){
-            if(ar[i]>max) max = ar[i];
-        }
-        return max;
-    }
-
-    private static boolean has_max_in_right(int [] ar, int curr){
-        for(int i=curr+1;i<ar.length;i++){
-            if(ar[i]>ar[curr]) return true;
-        }
-        return false;
+        return max_profit;
     }
 }
