@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -16,17 +17,20 @@ public class NobleInteger {
 
     public static int solve(int[] arr) {
         Arrays.sort(arr);
-        for (int i = 0; i < arr.length / 2; i++) {
-            int temp = arr[i];
-            arr[i] = arr[arr.length - 1 - i];
-            arr[arr.length - 1 - i] = temp;
+        //reversing
+       int l = 0, r = arr.length-1;
+       while(l<r){
+           int temp = arr[l];
+           arr[l]=arr[r];
+           arr[r]=temp;
+           l++;r--;
+       }
+        if(arr.length==1 || arr[0]==0) return -1;
+        int greater_count = 0;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]!=arr[i-1]) greater_count = i;
+            if(arr[i]==greater_count) return 1;
         }
-
-        if(arr.length==1) return -1;
-//        int greater_count = 0;
-//            if(arr[i]!=arr[i-1]) greater_count = i;
-//            if(arr[i]==greater_count) return 1;
-//        }
         return -1;
     }
 }
